@@ -1,0 +1,21 @@
+﻿<Window x:Class="hotel24Eq5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hotel24Eq5"
+        mc:Ignorable="d"
+        Title="Reservation" Name="win" Height="700" Width="1100">
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!--menu-->
+                <RowDefinition Height="*"/>
+                <!--View spécifique-->
+            </Grid.RowDefinitions>
+            <Menu Width="{Binding ElementName=win, Path=Width}">
+                <MenuItem Header="_Accueil" Command="{Binding CmdGotoAccueil}" />
+                <MenuItem Header="_Personnes" Command="{Binding CmdGotoPersonne}"
+             </Menu>
+    </Grid>
+</Window>
