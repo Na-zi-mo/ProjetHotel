@@ -9,7 +9,7 @@
         
         mc:Ignorable="d"
         Title="MainWindow" Name="win" Height="450" Width="800">
-    <Grid>
+    <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -17,6 +17,7 @@
         <Menu Width="{Binding ElementName=win, Path=Width}">
             <MenuItem Header="_Accueil" Command="{Binding CmdGotoAccueil}"/>
             <MenuItem Header="_Chambre" Command="{Binding CmdGotoChambre}"/>
+            <MenuItem Header="_Arrive" Command="{Binding CmdGotoArrive}"/>
         </Menu>
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
@@ -25,6 +26,9 @@
                 </DataTemplate>
                 <DataTemplate x:Name="ChambreViewTemplate" DataType="{x:Type viewmodels:ChambreViewModel}">
                     <views:ChambreView></views:ChambreView>
+                </DataTemplate>
+                <DataTemplate x:Name="ArriveViewTemplate" DataType="{x:Type viewmodels:ArriveViewModel}">
+                    <views:ArriveView></views:ArriveView>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

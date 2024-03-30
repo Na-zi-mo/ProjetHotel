@@ -12,6 +12,7 @@ namespace hotel24Eq5.ViewModels
     {
         public RelayCommand CmdGotoAccueil { get; private set; }
         public RelayCommand CmdGotoChambre { get; private set; }
+        public RelayCommand CmdGotoArrive { get; private set; }
 
         private BaseViewModel currentViewModel;
 
@@ -33,6 +34,8 @@ namespace hotel24Eq5.ViewModels
 
             CmdGotoAccueil = new RelayCommand(GotoAccueil, null);
             CmdGotoChambre = new RelayCommand(GotoChambre, null);
+            CmdGotoArrive = new RelayCommand(GotoArrive, null);
+
         }
 
         private void GotoAccueil(object obj)
@@ -42,6 +45,10 @@ namespace hotel24Eq5.ViewModels
         private void GotoChambre(object obj)
         {
             CurrentViewModel = new ChambreViewModel();
+        }
+        private void GotoArrive(object obj)
+        {
+            CurrentViewModel = new ArriveViewModel();
         }
     }
 }
