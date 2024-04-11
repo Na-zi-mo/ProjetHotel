@@ -5,58 +5,224 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:hotel24Eq5.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="700" d:DesignWidth="1100" Background="White">
     <Grid ShowGridLines="True">
-        
+        <!--5 colonnes 0 et 1 et 2 pour autres listes au choix-->
+        <!--colonne 3 liste de navigation principale-->
+        <!--colonne 4  tout le reste divisée dans un autre grid-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="*"/>
-            <!--<ColumnDefinition Width="*"/>-->
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="AUTO" MinWidth="50" />
+            <ColumnDefinition Width="*" />
+
         </Grid.ColumnDefinitions>
-        
-        <WrapPanel Grid.Column="0" Background="Beige">
-            <Label Content="Arrive"/>
+
+        <!--liste de navigation principale a gauche-->
+        <WrapPanel  Grid.Column="2" Background="Bisque">
+            <ListView x:Name="cHAMBREListView" Height="200" ItemsSource="{Binding}" SelectionMode="Single" Width="400">
+                <ListView.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Control.VerticalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn x:Name="code_LocalisationColumn" Header="Code Localisation" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Margin="6,-1,-6,-1" Text="{Binding Code_Localisation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="code_TypeChambreColumn" Header="Code Type Chambre" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Code_TypeChambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="etageColumn" Header="Etage" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Etage, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="etatColumn" Header="Etat" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Etat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="-6,-1,-6,-1"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="id_ChambreColumn" Header="Id Chambre" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Id_Chambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="memoColumn" Header="Memo" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Memo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="prixColumn" Header="Prix" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Prix, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </WrapPanel>
 
-        <Grid Grid.Column="1" ShowGridLines="True">
+
+
+
+        <Grid ShowGridLines="True" Grid.Column="4"  Background="#FFBFCDDB" HorizontalAlignment="Stretch" >
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="AUTO"  />
+
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition   Height="4*"/>
+                <RowDefinition Height="AUTO" MinHeight="10"/>
+                <RowDefinition  Height="3*"/>
+                <RowDefinition  Height="50"/>
             </Grid.RowDefinitions>
 
-            <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Right" Height="25" Width="300">
-                <Label Content="Informations sur le client qui arrive"/>
-            </Border>
 
-            <Border Grid.Column="0" Grid.Row="1" BorderThickness="1" BorderBrush="Black" >
-                <StackPanel>
-                    <WrapPanel>
-                        <!--Client No et Nom-->
-                    </WrapPanel>
-                    <WrapPanel>
-                        <!--Adresse-->
-                    </WrapPanel>
-                    <WrapPanel>
-                        <!--Téléphone-->
-                    </WrapPanel>
-                    <WrapPanel>
-                        <!--Adresse-->
-                    </WrapPanel>
-                    <WrapPanel>
-                        <!--Client No et Nom-->
-                    </WrapPanel>
-                    <WrapPanel>
-                        <!--Adresse-->
-                    </WrapPanel>
+            <!-- Liaison à l'objet personne  -->
+            <StackPanel Background="LightSkyBlue"  Name="topleft"   Grid.Row="0"  Grid.Column="0"  Margin="5"  >
+                <Grid x:Name="grid1" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Content="Code Localisation:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="code_LocalisationTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding Code_Localisation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Code Type Chambre:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <TextBox x:Name="code_TypeChambreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding Code_TypeChambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Etage:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBox x:Name="etageTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding Etage, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Etat:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="etatCheckBox" Grid.Column="1" Content="" HorizontalAlignment="Left" IsChecked="{Binding Etat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Id Chambre:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                    <TextBox x:Name="id_ChambreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding Id_Chambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Memo:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                    <TextBox x:Name="memoTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="5" Text="{Binding Memo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Prix:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+                    <TextBox x:Name="prixTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6" Text="{Binding Prix, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                </Grid>
 
-                </StackPanel>
-            </Border>
+            </StackPanel>
+
+            <!--partie centrale haut lien 1-1-->
+            <StackPanel Background="CornflowerBlue"  Margin="20,20,0,10" Name="topcenter" Grid.Row="0"  Grid.Column="1"   >
+                <Grid x:Name="grid2" DataContext="{StaticResource cLIENTViewSource}" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Content="Adresse:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="adresseTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding Adresse, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Date Exp:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="date_ExpDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" SelectedDate="{Binding Date_Exp, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Id Client:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBox x:Name="id_ClientTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding Id_Client, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Nom:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="nomTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding Nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Num Carte:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                    <TextBox x:Name="num_CarteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding Num_Carte, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Solde Du:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                    <TextBox x:Name="solde_DuTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="5" Text="{Binding Solde_Du, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Telephone:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+                    <TextBox x:Name="telephoneTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6" Text="{Binding Telephone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Type Carte:" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+                    <TextBox x:Name="type_CarteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="7" Text="{Binding Type_Carte, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                </Grid>
+
+
+
+            </StackPanel>
+            <!--fin lien 1-1-->
+            <!--bouton add edit delete save cancel parent-->
+            <StackPanel   Grid.Column="2" Margin="10,10,10,5" >
+
+                <Button Margin="0,5,5,5" Command="{Binding AddArriveCommand}" Width  ="75" >Add</Button>
+                <Button   Margin="0,5,5,5" Command="{Binding EditArriveCommand}" Content="Edit"  Width  ="75"/>
+                <Button   Margin="0,5,5,5" Command="{Binding DeleteArriveCommand}" Content="Delete"  Width  ="75"/>
+
+                <Button   Margin="0,5,5,5" Command="{Binding SaveArriveCommand}" Content="Save" Width  ="75" />
+                <Button   Margin="0,5,5,5" Command="{Binding CancelArriveCommand}" Content="Cancel" Width  ="75" />
+            </StackPanel>
+            <WrapPanel  Name="ligneVide" Background="Yellow" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+            <!--bouton add edit delete save cancel enfant droite du grid-->
+            <StackPanel Name="buttomRight" Grid.Row="2" Grid.Column="2" Margin="10,10,10,5" >
+
+
+                <Button Name="btnAddEnfant" Margin="0,5,5,5" Command="{Binding AddEnfantCommand}" Width="75"
+              >Add Enfant</Button>
+                <Button Name="btnDeleteEnfant"  Margin="0,5,5,5" Command="{Binding DeleteEnfantCommand}"
+                 CommandParameter="{Binding ElementName=mon_DataGrid, Path=SelectedItem}" Width="75">Delete Enfant</Button>
+
+
+            </StackPanel>
+
+
+            <!--<StackPanel Grid.Column="1" Grid.Row="1" Margin="10,10,10,5" Name="nav" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button Name="btnFirst"   Command="{Binding FirstPersonneCommand}" Content="|◄" Style="{StaticResource NavButton}"/>
+            <Button Name="btnPrev"   Command="{Binding PrevPersonneCommand}"  Content="◄"  Style="{StaticResource NavButton}"/>
+            <Button Name="btnNext"  Command="{Binding NextPersonneCommand}"   Content="►"  Style="{StaticResource NavButton}"/>
+            <Button Name="btnLast"  Command="{Binding LastPersonneCommand}"   Content="►|" Style="{StaticResource NavButton}"/>
+        </StackPanel>-->
+            <StackPanel Background="Azure"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{StaticResource aYANTViewSource}" >
+                <DataGrid x:Name="aYANTDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="400">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="code_CommoditeColumn" Binding="{Binding Code_Commodite}" Header="Code Commodite" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_AyantColumn" Binding="{Binding Id_Ayant}" Header="Id Ayant" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_ChambreColumn1" Binding="{Binding Id_Chambre}" Header="Id Chambre" Width="SizeToHeader"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel Background="CadetBlue"   Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
+            </StackPanel>
         </Grid>
-        
+
+
+
+
+
+
+
     </Grid>
 </UserControl>

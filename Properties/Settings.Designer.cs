@@ -22,5 +22,16 @@ namespace hotel24Eq5.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-BA8LUHNR\\SQLEXPRESS;Initial Catalog=bdhotel24;Integrated Secur" +
+            "ity=True;TrustServerCertificate=True")]
+        public string bdhotel24ConnectionString {
+            get {
+                return ((string)(this["bdhotel24ConnectionString"]));
+            }
+        }
     }
 }

@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="bdhotel24DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bdhotel24DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Models\DataServiceHotel.cs" />
     <Compile Include="ViewModels\AccueilViewModel.cs" />
@@ -157,6 +162,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bdhotel24DataSet.xsc">
+      <DependentUpon>bdhotel24DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="bdhotel24DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>bdhotel24DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="bdhotel24DataSet.xss">
+      <DependentUpon>bdhotel24DataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
