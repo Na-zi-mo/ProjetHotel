@@ -247,6 +247,7 @@ insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisa
 insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisation,Memo) VALUES (0301,3, 100.99, 1, '2D','VM', 'ordinaire');
 insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisation,Memo) VALUES (0302,3, 100.99, 1, '2D','VM', 'ordinaire');
 insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisation,Memo) VALUES (0303,3, 100.99, 1, '2D','VM', 'ordinaire');
+insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisation,Memo) VALUES (0401,4, 75.99, 1, '2D','VM', 'ordinaire');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) values (0101, 'AS');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0202, 'MB');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) values (0201, 'AS');
@@ -259,6 +260,7 @@ insert into AYANT(ID_CHAMbre, CODE_COMmodite) values (0302, 'AS');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0302, 'MB');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) values (0303, 'AS');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0303, 'MB');
+insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0401, 'MB');
 
 insert into DE(ID_RESERve, ID_CHAMbre, ATTRIBUEE) VALUES (1, 0101, 1);
 insert into DE(ID_RESERve, ID_CHAMbre, ATTRIBUEE) VALUES (2, 0201, 1);
@@ -272,12 +274,16 @@ insert into DE(ID_RESERve, ID_CHAMbre, ATTRIBUEE) VALUES (4, 0202, 0);
 insert into DE(ID_RESERve, ID_CHAMbre,ATTRIBUEE) VALUES (5, 0202, 0);
 insert into DE(ID_RESERve, ID_CHAMbre,ATTRIBUEE) VALUES (6, 0202, 1);
 
+insert into DE(ID_RESERve, ID_CHAMbre,ATTRIBUEE) VALUES (6, 0401, 0);
+
 insert into ARRIVE(ID_RESERve, DATE_ARRIVe, ID_CLIENT, ID_CHAMbre, RECU_PAR ) VALUES(1, GETDATE(), 1, 0101, 'LA');
 insert into ARRIVE(ID_RESERve, DATE_ARRIVe, ID_CLIENT,ID_CHAMbre, RECU_PAR ) VALUES(2, GETDATE()-1, 2,0201, 'LA');
 insert into ARRIVE(ID_RESERve, DATE_ARRIVe, ID_CLIENT, ID_CHAMbre, RECU_PAR ) VALUES(3, GETDATE()-1, 4, 0103, 'LA');
 insert into ARRIVE(ID_RESERve, DATE_ARRIVe, ID_CLIENT, ID_CHAMbre, RECU_PAR ) VALUES(3, GETDATE()-1, 4, 301, 'LA');
 insert into ARRIVE(ID_RESERve, DATE_ARRIVe, ID_CLIENT, ID_CHAMbre, RECU_PAR ) VALUES(3, GETDATE()-1, 4, 302, 'LA');
 insert into ARRIVE(ID_RESERve, DATE_ARRIVe, ID_CLIENT, ID_CHAMbre, RECU_PAR ) VALUES(6, GETDATE()-1, 5, 0202, 'LA');
+
+--insert into ARRIVE(ID_RESERve, DATE_ARRIVe, ID_CLIENT, ID_CHAMbre, RECU_PAR ) VALUES(6, GETDATE()-1, 3, 0401, 'LA');
 
 
 insert into TYPETRX(Code_TypeTrx,Description,Db_Cr) VALUES ('01', 'PRIX DE LA CHAMBRE','DB');
@@ -303,10 +309,10 @@ insert into TRX(Id_Arrive,Date_Trx,Code_TypeTrx,Montant,Conf_Par,Reportee) VALUE
 
 --SELECT * FROM TRX;
 --SELECT * FROM DEPART;
---SELECT * FROM ARRIVE;
+SELECT * FROM ARRIVE;
 --SELECT * FROM TYPETRX;
 SELECT * FROM DE;
---SELECT * FROM RESERVE;
+SELECT * FROM RESERVE;
 --SELECT * FROM AYANT;
 SELECT * FROM CHAMBRE;
 --SELECT * FROM LOCALISATION;
