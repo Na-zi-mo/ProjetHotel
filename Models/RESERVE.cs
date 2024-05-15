@@ -19,14 +19,20 @@ namespace hotel24
         {
             this.ARRIVE = new ObservableCollection <ARRIVE>();
             this.DE = new ObservableCollection <DE>();
+            Date_Reserve = DateTime.Now;
+            Date_Debut = DateTime.Now;
+            Date_Fin = null;
         }
-    
-        public int Id_Reserve { get; set; }
+        
+
+
+
+        public int Id_Reserve { get; set; } = -1;
         public Nullable<int> Id_Client { get; set; }
         public Nullable<System.DateTime> Date_Reserve { get; set; }
         public Nullable<System.DateTime> Date_Debut { get; set; }
         public Nullable<System.DateTime> Date_Fin { get; set; }
-        public Nullable<bool> Confirme { get; set; }
+        public Nullable<bool> Confirme { get; set; } = false;
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<ARRIVE> ARRIVE { get; set; }

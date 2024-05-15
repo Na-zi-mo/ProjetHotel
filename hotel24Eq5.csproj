@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Models\DataService.cs" />
     <Compile Include="ViewModels\AccueilViewModel.cs" />
     <Compile Include="ViewModels\ArriveViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -77,6 +79,12 @@
     </Compile>
     <Compile Include="Views\DepartView.xaml.cs">
       <DependentUpon>DepartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListSelectClientView.xaml.cs">
+      <DependentUpon>ListSelectClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListSelectProdView.xaml.cs">
+      <DependentUpon>ListSelectProdView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReservationView.xaml.cs">
       <DependentUpon>ReservationView.xaml</DependentUpon>
@@ -115,6 +123,14 @@
     <Page Include="Views\DepartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListSelectClientView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListSelectProdView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ReservationView.xaml">
       <SubType>Designer</SubType>
@@ -163,6 +179,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Scripts\PS_InsertReservation.sql" />
+    <Content Include="Scripts\SQLhotel24 %282%29.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

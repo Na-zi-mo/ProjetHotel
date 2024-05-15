@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace hotel24Eq5.ViewModels
 {
-    internal class DepartViewModel
+    public class DepartViewModel : BaseViewModel
     {
+        public DepartViewModel() { }
     }
 }

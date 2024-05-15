@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace hotel24Eq5.ViewModels
 {
-    internal class TypeChambreViewModel
+    public class TypeChambreViewModel : BaseViewModel
     {
+        public TypeChambreViewModel() { }
     }
 }

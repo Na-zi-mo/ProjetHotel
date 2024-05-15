@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace hotel24Eq5.ViewModels
 {
-    internal class AccueilViewModel
+    public class AccueilViewModel : BaseViewModel
     {
+        public AccueilViewModel()
+        {
+
+        }
     }
 }

@@ -1,12 +1,206 @@
-﻿<UserControl x:Class="hotel24Eq5.Views.ReservationView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:hotel24Eq5.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Label Content=" Reservation"/>
+﻿    <UserControl x:Class="hotel24Eq5.Views.ReservationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hotel24Eq5.Views"
+        mc:Ignorable="d"
+             
+        d:DesignHeight="700" d:DesignWidth="1100">
+
+    <Grid ShowGridLines="True">
+        <!--5 colonnes 0 et 1 et 2 pour autres listes au choix-->
+        <!--colonne 3 liste de navigation principale-->
+        <!--colonne 4  tout le reste divisée dans un autre grid-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="AUTO" />
+            <ColumnDefinition Width="AUTO" MinWidth="50" />
+            <ColumnDefinition Width="AUTO" MinWidth="50" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <local:ListSelectProdView Grid.Column="0" Grid.ColumnSpan="1" Visibility="{Binding VisibilitySelectChambre}" ></local:ListSelectProdView>
+
+        <local:ListSelectClientView Grid.Column="1" Grid.ColumnSpan="1" Visibility="{Binding VisibilitySelectClient}" ></local:ListSelectClientView>
+
+
+        <WrapPanel Visibility="{Binding VisibilitySelectReserve}" Grid.Column="2" Background="Bisque">
+            <ListView x:Name="rESERVEListView" Height="200" ItemsSource="{Binding ReservesViewSource}" SelectionMode="Single" Width="350"
+                      IsSynchronizedWithCurrentItem="True"
+                      IsEnabled="{Binding IsEnabledListNavigation}"
+                      >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn x:Name="confirmeColumn" Header="Confirme" Width="53">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Confirme}" IsEnabled="False" Margin="6,-1,-6,-1"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="date_DebutColumn" Header="Date Debut" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock  Margin="-2,-1,-6,-1" Text="{Binding Date_Debut, StringFormat=dd-MM-yyyy}" Foreground="Blue"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="date_FinColumn" Header="Date Fin" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock  Margin="-2,-1,-6,-1" Text="{Binding Date_Fin, StringFormat=dd-MM-yyyy}" Foreground="Blue"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="date_ReserveColumn" Header="Date Reserve" Width="75">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock  Margin="-1,-1,-6,-1" Text="{Binding Date_Reserve,StringFormat=dd-MM-yyyy}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="id_ClientColumn" Header="Id Client" Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock  Margin="11,-1,-6,-1" Text="{Binding Id_Client}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="id_ReserveColumn" Header="Id Reserve" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="15,-1,-6,-1" Text="{Binding Id_Reserve}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </WrapPanel>
+
+
+
+        <Grid ShowGridLines="True" Grid.Column="4"  Background="#FFBFCDDB" HorizontalAlignment="Stretch" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="AUTO"  />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition   Height="4*"/>
+                <RowDefinition Height="AUTO" MinHeight="10"/>
+                <RowDefinition  Height="3*"/>
+                <RowDefinition  Height="50"/>
+            </Grid.RowDefinitions>
+
+
+            <!--Liaison à l'objet personne-->
+            <StackPanel Background="LightSkyBlue"  Name="first"   Grid.Row="0"  Grid.Column="0"  Margin="5"  >
+                <Grid x:Name="grid2"  HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0"  Content="Adresse:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBox  x:Name="adresseTextBox" Grid.Column="1"  HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" IsReadOnly="{Binding IsEditing}"   Text="{Binding ReservesViewSource.CurrentItem.CLIENT.Adresse, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Date Exp:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="date_ExpDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" IsEnabled="False"  SelectedDate="{Binding ReservesViewSource.CurrentItem.CLIENT.Date_Exp, Mode=TwoWay,  NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Id Client:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBox x:Name="id_ClientTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2"  IsReadOnly="{Binding IsEditing}"  Text="{Binding ReservesViewSource.CurrentItem.Id_Client, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Nom:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="nomTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3"  IsReadOnly="{Binding IsEditing}"   Text="{Binding ReservesViewSource.CurrentItem.CLIENT.Nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Num Carte:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                    <TextBox x:Name="num_CarteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4"  IsReadOnly="{Binding IsEditing}"  Text="{Binding ReservesViewSource.CurrentItem.CLIENT.Num_Carte, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Solde Du:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                    <TextBox x:Name="solde_DuTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="5" IsReadOnly="{Binding IsEditing}"  Text="{Binding ReservesViewSource.CurrentItem.CLIENT.Solde_Du, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Telephone:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+                    <TextBox x:Name="telephoneTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6"  IsReadOnly="{Binding IsEditing}"  Text="{Binding ReservesViewSource.CurrentItem.CLIENT.Telephone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Type Carte:" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+                    <TextBox x:Name="type_CarteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="7"  IsReadOnly="{Binding IsEditing}"  Text="{Binding ReservesViewSource.CurrentItem.CLIENT.Type_Carte, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                </Grid>
+                <Button Margin="0,5,5,5" Content="Add Client" Command="{Binding AddCCommand}"  Width  ="100" />
+            </StackPanel>
+
+
+
+
+
+
+            <!--partie centrale haut lien 1-1-->
+            <StackPanel Background="CornflowerBlue"  Margin="20,20,0,10" Name="topcenter" Grid.Row="0"  Grid.Column="1"   >
+                <Grid x:Name="grid1"  HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Content="Confirme:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="confirmeCheckBox" Grid.Column="1" Content="" HorizontalAlignment="Left" IsChecked="{Binding ReservesViewSource.CurrentItem.Confirme, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled}" Margin="3" Grid.Row="0" VerticalAlignment="Center" />
+                    <Label Grid.Column="0" Content="Date Debut:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="date_DebutDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" IsEnabled="{Binding IsEditingDates}"  SelectedDate="{Binding ReservesViewSource.CurrentItem.Date_Debut, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Date Fin:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="date_FinDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" IsEnabled="{Binding IsEditingDates}"  SelectedDate="{Binding ReservesViewSource.CurrentItem.Date_Fin, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Date Reserve:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="date_ReserveDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" IsEnabled="{Binding IsEditingDates}"  SelectedDate="{Binding ReservesViewSource.CurrentItem.Date_Reserve, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+
+                    <Label Grid.Column="0" Content="Id Reserve:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                    <TextBox x:Name="id_ReserveTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="5"  IsReadOnly="{Binding IsEditing}"  Text="{Binding ReservesViewSource.CurrentItem.Id_Reserve, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="120"/>
+                </Grid>
+            </StackPanel>
+            <!--fin lien 1-1-->
+            <!--bouton add edit delete save cancel parent-->
+            <StackPanel   Grid.Column="2" Margin="10,10,10,5" >
+                <Button   Margin="0,5,5,5" Command="{Binding AddReserveCommand}" Width  ="75" >Add</Button>
+                <Button   Margin="0,5,5,5" Command="{Binding EditReserveCommand}" Content="Edit"  Width  ="75"/>
+                <Button   Margin="0,5,5,5" Command="{Binding DeleteReserveCommand}" Content="Delete"  Width  ="75"/>
+                <Button   Margin="0,5,5,5" Command="{Binding SaveReserveCommand}" Content="Save" Width  ="75" />
+                <Button   Margin="0,5,5,5" Command="{Binding CancelReserveCommand}" Content="Cancel" Width  ="75" />
+            </StackPanel>
+            <WrapPanel  Name="ligneVide" Background="Yellow" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+            <!--bouton add edit delete save cancel enfant droite du grid-->
+
+            <StackPanel Name="buttomRight" Grid.Row="2" Grid.Column="2" Margin="10,10,10,5" >
+
+
+                <Button Name="btnAddChambre" Margin="0,5,5,5" Command="{Binding AddECommand}"  Width="75">Add Chambre</Button>
+
+                <Button Name="btnDeleteChambre"  Margin="0,5,5,5" Command="{Binding RemoveECommand}"
+                 CommandParameter="{Binding ElementName=mon_DataGrid, Path=SelectedItem}" Width="75">Remove</Button>
+
+
+            </StackPanel>
+            <StackPanel Background="Azure"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                <DataGrid x:Name="mon_DataGrid"   Height="200" ItemsSource="{Binding ReservesViewSource.CurrentItem.DE  }"  CanUserAddRows="False"  Width="436" SelectionChanged="mon_DataGrid_SelectionChanged">
+                    <DataGrid.Columns >
+                        <DataGridCheckBoxColumn x:Name="attribueeColumn"    IsReadOnly="True"   Binding="{Binding Attribuee}" Header="Attribuee" Width="SizeToHeader" />
+                        <DataGridTextColumn x:Name="id_ChambreColumn"     IsReadOnly="True"    Binding="{Binding Id_Chambre}" Header="Id Chambre" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_DeColumn"            IsReadOnly="True"   Binding="{Binding Id_De}" Header="Id De" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_ReserveColumn1"       IsReadOnly="True"    Binding="{Binding Id_Reserve}" Header="Id Reserve" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_ReserveColumn2"         IsReadOnly="True"   Binding="{Binding CHAMBRE.Id_Chambre}" Header="No.Chambre" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_ReserveColumn3"      IsReadOnly="True"   Binding="{Binding CHAMBRE.Code_TypeChambre}" Header="T.Chambre" Width="70"/>
+                        <DataGridTextColumn x:Name="id_ReserveColumn4"     IsReadOnly="True"   Binding="{Binding CHAMBRE.Prix,  StringFormat=${0}}" Header="Prix" Width="50"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel/>
+        </Grid>
     </Grid>
 </UserControl>

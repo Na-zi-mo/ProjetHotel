@@ -24,5 +24,10 @@ namespace hotel24Eq5.Views
         {
             InitializeComponent();
         }
+
+        private void mon_DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

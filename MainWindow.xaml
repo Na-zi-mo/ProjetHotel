@@ -3,19 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:hotel24Eq5"
+        xmlns:views="clr-namespace:hotel24Eq5.Views"
+        xmlns:viewmodels="clr-namespace:hotel24Eq5.ViewModels"
+        xmlns:local="clr-namespace:hotel24Eq5" d:DataContext="{d:DesignInstance Type=viewmodels:ReservationViewModel}"
         mc:Ignorable="d"
-        Title="Reservation" Name="win" Height="700" Width="1100">
+        Title="Hotel" Name="win"  Height="700" Width="1100">
+
     <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!--menu-->
-                <RowDefinition Height="*"/>
-                <!--View spécifique-->
-            </Grid.RowDefinitions>
-            <Menu Width="{Binding ElementName=win, Path=Width}">
-                <MenuItem Header="_Accueil" Command="{Binding CmdGotoAccueil}" />
-                <MenuItem Header="_Personnes" Command="{Binding CmdGotoPersonne}"
-             </Menu>
+        <Grid.RowDefinitions>
+            <RowDefinition   Height="Auto"/>
+            <RowDefinition   Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Width="{Binding ElementName=win, Path=Width}">
+            <MenuItem Header="_Accueil" Command="{Binding CmdGotoAccueil}"  />
+            <MenuItem  Header="_Reservation" Command="{Binding CmdGotoReservation}"   />
+        </Menu>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" >
+            <ContentControl.Resources>
+                <DataTemplate x:Name="AccueilViewTemplate"
+                    DataType="{x:Type  viewmodels:AccueilViewModel}">
+                    <views:AccueilView></views:AccueilView>
+                </DataTemplate>
+
+                <DataTemplate x:Name="ReservationViewTemplate"
+                DataType="{x:Type  viewmodels:ReservationViewModel}">
+                    <views:ReservationView></views:ReservationView>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+
     </Grid>
+
+
 </Window>

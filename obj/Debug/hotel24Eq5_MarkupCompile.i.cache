@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Babacar\OneDrive - Cégep de Shawinigan\SESSION 4\DEV\Testbditem\hotel24Eq5\obj\Debug\
+C:\Users\Babacar\Documents\GitHub\ProjetHotel\obj\Debug\
 hotel24Eq5
 none
 false
 DEBUG;TRACE
-C:\Users\Babacar\OneDrive - Cégep de Shawinigan\SESSION 4\DEV\Testbditem\hotel24Eq5\App.xaml
-8-943845844
-
-331738841196
+C:\Users\Babacar\Documents\GitHub\ProjetHotel\App.xaml
+10-170189666
+2-2121169380
+371892814107
 13-1310406943
-MainWindow.xaml;Views\AccueilView.xaml;Views\ArriveView.xaml;Views\ChambreView.xaml;Views\ClientView.xaml;Views\DepartView.xaml;Views\ReservationView.xaml;Views\TypeChambreView.xaml;
+MainWindow.xaml;Views\AccueilView.xaml;Views\ArriveView.xaml;Views\ChambreView.xaml;Views\ClientView.xaml;Views\DepartView.xaml;Views\ListSelectClientView.xaml;Views\ListSelectProdView.xaml;Views\ReservationView.xaml;Views\TypeChambreView.xaml;
 
-True
+False
 
