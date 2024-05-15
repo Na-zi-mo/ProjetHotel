@@ -248,56 +248,6 @@ namespace hotel24Eq5.Models
 
         private void InsertArrive(SqlConnection connection, ARRIVE arrive)
         {
-            //String queryString = "PS_InsertArrive";
-            //using (SqlCommand command = new SqlCommand(queryString, connection))
-            //{
-            //    command.CommandType = CommandType.StoredProcedure;
-
-            //    command.Parameters.AddWithValue("@Id_Reserve", arrive.Id_Reserve);
-            //    command.Parameters.AddWithValue("@Id_Client", arrive.Id_Client);
-            //    command.Parameters.AddWithValue("@Date_Arrive", arrive.Date_Arrive);
-            //    command.Parameters.AddWithValue("@Id_Chambre", arrive.Id_Chambre);
-            //    command.Parameters.AddWithValue("@Recu_Par", arrive.Recu_Par);
-
-
-            //    SqlParameter paramIdItem = new SqlParameter("@Id_Arrive", SqlDbType.Int);
-            //    paramIdItem.Direction = ParameterDirection.Output;
-
-
-            //    var result = 0;
-            //    command.Parameters.Add(paramIdItem);
-            //    try
-            //    {
-            //        result = command.ExecuteNonQuery();
-
-            //        int num = (System.Int32)paramIdItem.Value;
-
-            //        arrive.Id_Arrive = num;
-
-            //        foreach (var item in arrive.RESERVE.DE)
-            //        {
-            //            queryString = "UPDATE DE" +
-            //              " SET Attribuee=@Attribuee " +
-            //              "WHERE(Id_De=@Id_De)";
-
-
-            //            SqlCommand command2 = new SqlCommand(queryString, connection);
-
-            //            command2.Parameters.AddWithValue("@Attribuee", item.Attribuee);
-
-            //            command2.Parameters.AddWithValue("@Id_De", item.Id_De);
-
-            //            command2.ExecuteNonQuery();
-            //        }
-
-            //    }
-            //    catch (Exception ee)
-            //    {
-            //        MessageBox.Show(ee.Message);
-            //        connection.Close();
-            //    }
-
-            //}
 
             String queryString = "INSERT INTO ARRIVE (Id_Reserve, Id_Client, Date_Arrive, Id_Chambre, Recu_Par) VALUES (@Id_Reserve,  @Id_Client, @Date_Arrive, @Id_Chambre, @Recu_Par)";
             using (SqlCommand command = new SqlCommand(queryString, connection))
