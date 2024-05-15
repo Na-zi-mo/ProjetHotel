@@ -73,6 +73,9 @@
     <Compile Include="Views\AccueilView.xaml.cs">
       <DependentUpon>AccueilView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddReserve.xaml.cs">
+      <DependentUpon>AddReserve.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ArriveView.xaml.cs">
       <DependentUpon>ArriveView.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,15 @@
     </Compile>
     <Compile Include="Views\DepartView.xaml.cs">
       <DependentUpon>DepartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListSelectChambreView.xaml.cs">
+      <DependentUpon>ListSelectChambreView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListSelectClientView.xaml.cs">
+      <DependentUpon>ListSelectClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListSelectReservationView.xaml.cs">
+      <DependentUpon>ListSelectReservationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReservationView.xaml.cs">
       <DependentUpon>ReservationView.xaml</DependentUpon>
@@ -107,6 +119,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddReserve.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ArriveView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +138,18 @@
     <Page Include="Views\DepartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListSelectChambreView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListSelectClientView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListSelectReservationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ReservationView.xaml">
       <SubType>Designer</SubType>
@@ -182,5 +210,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="scripts\PS_InsertArrive.sql" />
+    <Content Include="scripts\scriptBd_erick.sql" />
+    <Content Include="scripts\SQLhotel24v3.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

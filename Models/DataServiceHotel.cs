@@ -1,16 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+
 
 namespace hotel24Eq5.Models
 {
     public class DataServiceHotel
     {
         string connectionString;
+
+
+
+        ObservableCollection<CLIENT> listeClients;
+        public ObservableCollection<CLIENT> ListeClients
+        {
+            get => listeClients;
+            set
+            {
+                listeClients = value;
+            }
+        }
+
 
         #region ObservableCollection
 
@@ -125,11 +143,23 @@ namespace hotel24Eq5.Models
 
             }
         }
+
+        private ObservableCollection<DE> des;
+        public ObservableCollection<DE> Des
+        {
+            get => des;
+            set
+            {
+                des = value;
+
+
+            }
+        }
         #endregion
         public DataServiceHotel()
         {
             connectionString = @"Data Source=LAPTOP-BA8LUHNR\SQLEXPRESS;Initial Catalog=bdhotel24;Integrated Security=True;Connect Timeout=30;Encrypt=False";
-
+            //connectionString =;
             LoadAll();
 
         }
@@ -141,18 +171,409 @@ namespace hotel24Eq5.Models
                 connection.Open();
 
                 LoadClients(connection);
+
+                LoadTypeCahmbres(connection);
                 LoadChambres(connection);
+
                 LoadReserves(connection);
-                //LoadDe(connection);
 
                 LoadArrives(connection);
 
             }
         }
+        #region Actions
+        public void Delete(ARRIVE arrive)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+
+
+                string queryString = "DELETE dbo.TRX " +
+                                   "WHERE(TRX.Id_Arrive = @Id_Arrive)";
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
+                command.ExecuteNonQuery();
+
+                queryString = "DELETE dbo.DEPART " +
+                                   "WHERE(DEPART.Id_Arrive = @Id_Arrive)";
+                command = new SqlCommand(queryString, connection);
+
+                command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
+                command.ExecuteNonQuery();
+
+                queryString = "DELETE dbo.ARRIVE " +
+                                      "WHERE(ARRIVE.Id_Arrive = @Id_Arrive)";
+                command = new SqlCommand(queryString, connection);
+
+                command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
+                command.ExecuteNonQuery();
+
+
+
+                queryString = "UPDATE dbo.DE" +
+                   " SET Attribuee = @Attribuee " +
+                   "WHERE Id_Chambre=@Id_Chambre";
+
+                SqlCommand command2 = new SqlCommand(queryString, connection);
+
+                command2.Parameters.AddWithValue("@Attribuee", 0);
+                command2.Parameters.AddWithValue("@Id_Chambre", arrive.Id_Chambre);
+
+                command2.ExecuteNonQuery();
+
+            }
+
+        }
+        public void Save(ARRIVE arrive)
+        {
+            if (arrive.Id_Arrive == -1)
+            {
+                using (SqlConnection connection = new SqlConnection())
+                {
+                    connection.ConnectionString = connectionString;
+                    connection.Open();
+                    InsertArrive(connection, arrive);
+                    connection.Close();
+                }
+            }
+            else
+            {
+                UpdateArrive(arrive);
+            }
+        }
+
+
+        private void InsertArrive(SqlConnection connection, ARRIVE arrive)
+        {
+            String queryString = "dbo.PS_InsertArrive";
+            using (SqlCommand command = new SqlCommand(queryString, connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@Id_Reserve", arrive.Id_Reserve);
+                command.Parameters.AddWithValue("@Id_Client", arrive.Id_Client);
+                command.Parameters.AddWithValue("@Date_Arrive", arrive.Date_Arrive);
+                command.Parameters.AddWithValue("@Id_Chambre", arrive.Id_Chambre);
+                command.Parameters.AddWithValue("@Recu_Par", arrive.Recu_Par);
+
+
+                SqlParameter paramIdItem = new SqlParameter("@Id_Arrive", SqlDbType.Int);
+                paramIdItem.Direction = ParameterDirection.Output;
+
+
+                var result = 0;
+                command.Parameters.Add(paramIdItem);
+                try
+                {
+                    result = command.ExecuteNonQuery();
+
+                    int num = (System.Int32)paramIdItem.Value;
+
+                    arrive.Id_Arrive = num;
+
+                    foreach (var item in arrive.RESERVE.DE)
+                    {
+                        queryString = "UPDATE dbo.DE" +
+                          " SET Attribuee=@Attribuee " +
+                          "WHERE(Id_De=@Id_De)";
+
+
+                        SqlCommand command2 = new SqlCommand(queryString, connection);
+
+                        command2.Parameters.AddWithValue("@Attribuee", item.Attribuee);
+
+                        command2.Parameters.AddWithValue("@Id_De", item.Id_De);
+
+                        command2.ExecuteNonQuery();
+                    }
+
+                }
+                catch (Exception ee)
+                {
+                    MessageBox.Show(ee.Message);
+                    connection.Close();
+                }
+
+            }
+
+        }
+
+        public void UpdateArrive(ARRIVE arrive)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                string queryString = "UPDATE dbo.ARRIVE" +
+                    " SET Id_Chambre = @Id_Chambre, " + "Recu_Par = @Recu_Par " +
+                    "WHERE Id_Arrive=@Id_Arrive";
+
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.AddWithValue("@Id_Chambre", arrive.Id_Chambre);
+                command.Parameters.AddWithValue("@Recu_Par", arrive.Recu_Par);
+                command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
+
+                var result = 0;
+                try
+                {
+
+                    result = command.ExecuteNonQuery();
+                    if (result > 0)
+                    {
+                        foreach (var item in arrive.RESERVE.DE)
+                        {
+                            queryString = "UPDATE dbo.DE" +
+                          " SET Attribuee=@Attribuee " +
+                          "WHERE(Id_De=@Id_De)";
+
+
+                            SqlCommand command2 = new SqlCommand(queryString, connection);
+
+                            command2.Parameters.AddWithValue("@Attribuee", item.Attribuee);
+
+                            command2.Parameters.AddWithValue("@Id_De", item.Id_De);
+
+                            command2.ExecuteNonQuery();
+                        }
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
+
+        public void ReloadArrive(ARRIVE arrive)
+        {
+            int index = Arrives.IndexOf(arrive);
+            Arrives.RemoveAt(index);
+
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                string queryString = "SELECT * " +
+                  "FROM dbo.ARRIVE " +
+                  "WHERE Id_Arrive=@Id_Arrive";
+
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
+                command.ExecuteNonQuery();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+
+                    while (reader.Read())
+                    {
+                        ARRIVE arr = new ARRIVE();
+                        ReaderToArrive(reader, arrive);
+
+                        Arrives.Insert(index, arrive);
+                    }
+
+                }
+                foreach (var arr in arrives)
+                {
+                    arr.CLIENT = Clients.FirstOrDefault(i => i.Id_Client == arr.Id_Client);
+
+                    arr.CHAMBRE = Chambres.FirstOrDefault(i => i.Id_Chambre == arr.Id_Chambre);
+
+                    arr.RESERVE = Reserves.FirstOrDefault(i => i.Id_Reserve == arr.Id_Reserve);
+
+                    LoadTrxs(connection, arr);
+                    LoadDeparts(connection, arr);
+                }
+            }
+        }
+        #endregion
+        #region Loaders
+        private void LoadTypeCahmbres(SqlConnection connection)
+        {
+
+            TypesChambres = new ObservableCollection<TYPECHAMBRE>();
+
+            string queryString = "SELECT * FROM dbo.TYPECHAMBRE";
+
+            SqlCommand command = new SqlCommand(queryString, connection);
+            command.ExecuteNonQuery();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    TYPECHAMBRE typeChambre = new TYPECHAMBRE();
+
+                    ReaderToTypeChambre(reader, typeChambre);
+                    TypesChambres.Add(typeChambre);
+                }
+            }
+        }
+
+        private void ReaderToTypeChambre(SqlDataReader reader, TYPECHAMBRE typeChambre)
+        {
+            typeChambre.Nbr_Dispo = (Int32)reader["Nbr_Dispo"];
+            typeChambre.Code_TypeChambre = (string)reader["Code_TypeChambre"];
+            typeChambre.Description = (string)reader["Description"];
+        }
+        private void LoadDes(SqlConnection connection, RESERVE reserve)
+        {
+            string queryString = "SELECT * FROM dbo.DE WHERE Id_Reserve=@Id_Reserve";
+
+            SqlCommand command = new SqlCommand(queryString, connection);
+            command.Parameters.AddWithValue("@Id_Reserve", reserve.Id_Reserve);
+            command.ExecuteNonQuery();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    DE de = new DE();
+
+                    ReaderToDe(reader, de);
+                    de.CHAMBRE = Chambres.FirstOrDefault(i => i.Id_Chambre == de.Id_Chambre);
+                    reserve.DE.Add(de);
+                }
+            }
+        }
+
+        private void ReaderToDe(SqlDataReader reader, DE de)
+        {
+            de.Id_De = (Int32)reader["Id_De"];
+            de.Id_Reserve = (Int32)reader["Id_Reserve"];
+            de.Id_Chambre = (Int32)reader["Id_Chambre"];
+
+            de.Attribuee = (bool)reader["Attribuee"];
+        }
+
+        private void LoadTrxs(SqlConnection connection, ARRIVE arrive)
+        {
+            Trxs = new ObservableCollection<TRX>();
+
+            string queryString = "SELECT * FROM dbo.TRX " +
+                "WHERE Id_Arrive=@Id_Arrive";
+
+            SqlCommand command = new SqlCommand(queryString, connection);
+            command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    TRX trx = new TRX();
+
+                    ReaderToTrx(reader, trx);
+
+                    Trxs.Add(trx);
+                }
+            }
+        }
+
+        private void ReaderToTrx(SqlDataReader reader, TRX trx)
+        {
+            trx.Id_Trx = (Int32)reader["Id_Trx"];
+            trx.Id_Arrive = (Int32)reader["Id_Arrive"];
+
+            trx.Date_Trx = (DateTime)reader["Date_Trx"];
+            trx.Code_TypeTrx = (string)reader["Code_TypeTrx"];
+
+            trx.Montant = !reader.IsDBNull(reader.GetOrdinal("Montant")) ? (decimal?)reader["Montant"] : null;
+
+            trx.Conf_Par = (string)reader["Conf_Par"];
+            trx.Reportee = (bool)reader["Reportee"];
+        }
+
+        private void LoadDeparts(SqlConnection connection, ARRIVE arrive)
+        {
+            Departs = new ObservableCollection<DEPART>();
+
+            string queryString = "SELECT * FROM dbo.DEPART " + "WHERE Id_Arrive=@Id_Arrive";
+
+            SqlCommand command = new SqlCommand(queryString, connection);
+            command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    DEPART depart = new DEPART();
+
+                    ReaderToDepart(reader, depart);
+
+                    Departs.Add(depart);
+                }
+            }
+        }
+
+        private void ReaderToDepart(SqlDataReader reader, DEPART depart)
+        {
+            depart.Id_Depart = (Int32)reader["Id_Depart"];
+            depart.Id_Arrive = (Int32)reader["Id_Arrive"];
+
+            depart.Date_Depart = (DateTime)reader["Date_Depart"];
+            depart.Conf_Par = (string)reader["Conf_Par"];
+        }
 
         private void LoadArrives(SqlConnection connection)
         {
-            throw new NotImplementedException();
+            Arrives = new ObservableCollection<ARRIVE>();
+
+            string queryString = "SELECT * FROM dbo.ARRIVE";
+
+            SqlCommand command = new SqlCommand(queryString, connection);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    ARRIVE arrive = new ARRIVE();
+
+                    ReaderToArrive(reader, arrive);
+
+                    Arrives.Add(arrive);
+                }
+
+            }
+            foreach (var arrive in arrives)
+            {
+                arrive.CLIENT = Clients.FirstOrDefault(i => i.Id_Client == arrive.Id_Client);
+
+                arrive.CHAMBRE = Chambres.FirstOrDefault(i => i.Id_Chambre == arrive.Id_Chambre);
+
+                arrive.RESERVE = Reserves.FirstOrDefault(i => i.Id_Reserve == arrive.Id_Reserve);
+
+                LoadTrxs(connection, arrive);
+                LoadDeparts(connection, arrive);
+            }
+        }
+
+        private void ReaderToArrive(SqlDataReader reader, ARRIVE arrive)
+        {
+            arrive.Id_Arrive = (Int32)reader["Id_Arrive"];
+            arrive.Id_Client = (Int32)reader["Id_Client"];
+            arrive.Id_Reserve = (Int32)reader["Id_Reserve"];
+
+            arrive.Id_Chambre = (Int32)reader["Id_Chambre"];
+
+            arrive.Date_Arrive = (DateTime)reader["Date_Arrive"];
+            arrive.Recu_Par = (string)reader["Recu_Par"];
         }
 
         private void LoadReserves(SqlConnection connection)
@@ -173,7 +594,15 @@ namespace hotel24Eq5.Models
                     ReaderToReserve(reader, reserve);
 
                     Reserves.Add(reserve);
+
+
                 }
+
+            }
+            foreach (var reserve in Reserves)
+            {
+                reserve.CLIENT = Clients.FirstOrDefault(i => i.Id_Client == reserve.Id_Client);
+                LoadDes(connection, reserve);
             }
         }
 
@@ -183,13 +612,10 @@ namespace hotel24Eq5.Models
             reserve.Id_Client = (Int32)reader["Id_Client"];
 
             reserve.Date_Reserve = (DateTime)reader["Date_Reserve"];
+            reserve.Date_Debut = (DateTime)reader["Date_Debut"];
+            reserve.Date_Fin = (DateTime)reader["Date_Fin"];
 
-            reserve.Etage = (int)reader["Etage"];
-            reserve.Prix = !reader.IsDBNull(reader.GetOrdinal("Prix")) ? (decimal?)reader["Prix"] : null;
-            reserve.Etat = (bool)reader["Etat"];
-            reserve.Code_Typereserve = (string)reader["Code_Typereserve"];
-            reserve.Code_Localisation = (string)reader["Code_Localisation"];
-            reserve.Memo = (string)reader["Memo"];
+            reserve.Confirme = (bool)reader["Confirme"];
         }
 
         private void LoadChambres(SqlConnection connection)
@@ -209,6 +635,8 @@ namespace hotel24Eq5.Models
 
                     ReaderToChambre(reader, chambre);
 
+
+                    chambre.TYPECHAMBRE = TypesChambres.FirstOrDefault(i => i.Code_TypeChambre == chambre.Code_TypeChambre);
                     Chambres.Add(chambre);
                 }
             }
@@ -256,7 +684,8 @@ namespace hotel24Eq5.Models
             client.Num_Carte = (string)reader["Num_Carte"];
             client.Type_Carte = (string)reader["Type_Carte"];
             client.Date_Exp = (DateTime)reader["Date_Exp"];
-            client.Solde_Du = !reader.IsDBNull(reader.GetOrdinal("Sole_Du")) ? (decimal?)reader["Sole_Du"] : null;
+            client.Solde_Du = (decimal)reader["Solde_Du"];
         }
     }
+    #endregion
 }

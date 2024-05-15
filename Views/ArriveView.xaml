@@ -7,20 +7,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1100" Background="White">
     <Grid ShowGridLines="True">
-        <!--5 colonnes 0 et 1 et 2 pour autres listes au choix-->
-        <!--colonne 3 liste de navigation principale-->
-        <!--colonne 4  tout le reste divisée dans un autre grid-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="AUTO" MinWidth="50" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto"/> 
+            <ColumnDefinition Width="Auto"/> 
+            <ColumnDefinition Width="Auto"/> 
+            <ColumnDefinition Width="Auto"/> 
+            <ColumnDefinition Width="2*" />
 
         </Grid.ColumnDefinitions>
 
-        <!--liste de navigation principale a gauche-->
-        <WrapPanel  Grid.Column="2" Background="Bisque">
-            <ListView x:Name="cHAMBREListView" Height="200" ItemsSource="{Binding}" SelectionMode="Single" Width="400">
+
+        <local:ListSelectClientView Grid.Column="0" Visibility="{Binding VisibilitySelectClient}"></local:ListSelectClientView>
+        <local:ListSelectReservationView Grid.Column="1" Visibility="{Binding VisibilitySelectReserve}"></local:ListSelectReservationView>
+        <local:ListSelectChambreView Grid.Column="2" Visibility="{Binding VisibilitySelectChambre}"></local:ListSelectChambreView>
+
+        <WrapPanel  Grid.Column="3" Background="Bisque" Visibility="{Binding VisibilityListArrive}">
+            <ListView x:Name="aRRIVEListView" Height="200" ItemsSource="{Binding ArrivesViewSource}" IsSynchronizedWithCurrentItem="True" IsEnabled="{Binding IsEnabledListNavigation}" SelectionMode="Single" Width="500">
                 <ListView.ItemContainerStyle>
                     <Style>
                         <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -29,52 +31,45 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn x:Name="code_LocalisationColumn" Header="Code Localisation" Width="80">
+                        <GridViewColumn x:Name="date_ArriveColumn" Header="Date Arrive" Width="80">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Margin="6,-1,-6,-1" Text="{Binding Code_Localisation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                    <TextBlock Margin="6,-1,-6,-1" Text="{Binding Date_Arrive, StringFormat=dd-MM-yyyy}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn x:Name="code_TypeChambreColumn" Header="Code Type Chambre" Width="80">
+                        <GridViewColumn x:Name="id_ArriveColumn" Header="Id Arrive" Width="80">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Code_TypeChambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Id_Arrive}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn x:Name="etageColumn" Header="Etage" Width="80">
+                        <GridViewColumn x:Name="id_ChambreColumn1" Header="Id Chambre" Width="80">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Etage, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Id_Chambre}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn x:Name="etatColumn" Header="Etat" Width="80">
+                        <GridViewColumn x:Name="id_ClientColumn" Header="Id Client" Width="80">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox IsChecked="{Binding Etat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="-6,-1,-6,-1"/>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Id_Client}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn x:Name="id_ChambreColumn" Header="Id Chambre" Width="80">
+                        <GridViewColumn x:Name="id_ReserveColumn" Header="Id Reserve" Width="80">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Id_Chambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Id_Reserve}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn x:Name="memoColumn" Header="Memo" Width="80">
+                        <GridViewColumn x:Name="recu_ParColumn" Header="Recu Par" Width="80">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Memo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn x:Name="prixColumn" Header="Prix" Width="80">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox Margin="-6,-1,-6,-1" Text="{Binding Prix, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Recu_Par}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -82,6 +77,9 @@
                 </ListView.View>
             </ListView>
         </WrapPanel>
+
+
+
 
 
 
@@ -102,8 +100,69 @@
             </Grid.RowDefinitions>
 
 
-            <!-- Liaison à l'objet personne  -->
             <StackPanel Background="LightSkyBlue"  Name="topleft"   Grid.Row="0"  Grid.Column="0"  Margin="5"  >
+                <Grid x:Name="grid2" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Content="Adresse:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="adresseTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" IsReadOnly="True" Text="{Binding ArrivesViewSource.CurrentItem.CLIENT.Adresse, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Date Exp:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="date_ExpDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1"  IsEnabled="False" SelectedDate="{Binding ArrivesViewSource.CurrentItem.CLIENT.Date_Exp, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Id Client:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <WrapPanel Grid.Column="1" Grid.Row="2">
+                        <TextBox x:Name="id_ClientTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3"  IsReadOnly="True" Text="{Binding ArrivesViewSource.CurrentItem.Id_Client, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="50"/>
+                        <Button Grid.Column="1" Grid.Row="4" Command="{Binding SelectClientCommand}" IsEnabled="{Binding IsEnabled}"  Content="Choisir Client"></Button>
+                        <!--Visibility="{Binding VisibilitySelectClient}"-->
+                    </WrapPanel>
+                    <Label Grid.Column="0" Content="Nom:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="nomTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3"  IsReadOnly="True" Text="{Binding ArrivesViewSource.CurrentItem.CLIENT.Nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Num Carte:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                    <TextBox x:Name="num_CarteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4"  IsReadOnly="True" Text="{Binding ArrivesViewSource.CurrentItem.CLIENT.Num_Carte, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Solde Du:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                    <TextBox x:Name="solde_DuTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="5"  IsReadOnly="True" Text="{Binding ArrivesViewSource.CurrentItem.CLIENT.Solde_Du, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Telephone:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+                    <TextBox x:Name="telephoneTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6"  IsReadOnly="True" Text="{Binding ArrivesViewSource.CurrentItem.CLIENT.Telephone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Type Carte:" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+                    <TextBox x:Name="type_CarteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="7"  IsReadOnly="True" Text="{Binding ArrivesViewSource.CurrentItem.CLIENT.Type_Carte, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="No. Arrivée:" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
+                    <TextBox x:Name="id_Arrive" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="8" IsEnabled="False" Text="{Binding ArrivesViewSource.CurrentItem.Id_Arrive, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="20"/>
+                    <Label Grid.Column="0" Content="Id Chambre:" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
+                    <TextBox x:Name="id_ChambreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="9" IsEnabled="False" Text="{Binding ArrivesViewSource.CurrentItem.Id_Chambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+                    <Label Grid.Column="0" Content="Date Arrivée:" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="Date_Arrive" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="10" IsEnabled="False" SelectedDate="{Binding ArrivesViewSource.CurrentItem.Date_Arrive, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Reçu Par:" HorizontalAlignment="Left" Margin="3" Grid.Row="11" VerticalAlignment="Center"/>
+                    <TextBox x:Name="Recu_Par" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="11" IsEnabled="{Binding IsEnabled}" Text="{Binding ArrivesViewSource.CurrentItem.Recu_Par, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                </Grid>
+                <Grid x:Name="grid4" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                </Grid>
+            </StackPanel>
+            <StackPanel Background="CornflowerBlue"  Margin="20,20,0,10" Name="topcenter" Grid.Row="0"  Grid.Column="1"   >
                 <Grid x:Name="grid1" HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -117,65 +176,40 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Content="Code Localisation:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                    <TextBox x:Name="code_LocalisationTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding Code_Localisation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Code Type Chambre:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-                    <TextBox x:Name="code_TypeChambreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding Code_TypeChambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Etage:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                    <TextBox x:Name="etageTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding Etage, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Etat:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                    <CheckBox x:Name="etatCheckBox" Grid.Column="1" Content="" HorizontalAlignment="Left" IsChecked="{Binding Etat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                    <Label Grid.Column="0" Content="Id Chambre:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-                    <TextBox x:Name="id_ChambreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding Id_Chambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Memo:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-                    <TextBox x:Name="memoTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="5" Text="{Binding Memo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Prix:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
-                    <TextBox x:Name="prixTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6" Text="{Binding Prix, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+
+                    <Label Grid.Column="0" Content="Date Debut:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="date_DebutDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" IsEnabled="False" SelectedDate="{Binding ArrivesViewSource.CurrentItem.RESERVE.Date_Debut, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Date Fin:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="date_FinDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" IsEnabled="False" SelectedDate="{Binding ArrivesViewSource.CurrentItem.RESERVE.Date_Fin, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Date Reserve:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="date_ReserveDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" IsEnabled="False" SelectedDate="{Binding ArrivesViewSource.CurrentItem.RESERVE.Date_Reserve, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Id Client:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" x:Name="id_ClientTextBox"  HorizontalAlignment="Left" Height="NaN" Margin="3"  IsReadOnly="True" Text="{Binding ArrivesViewSource.CurrentItem.RESERVE.Id_Client, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Id Reserve:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                    <WrapPanel Grid.Column="1" Grid.Row="5">
+                        <TextBox x:Name="id_ReserveTextBox"  HorizontalAlignment="Left" Height="NaN" Margin="3" IsReadOnly="True"  Text="{Binding ArrivesViewSource.CurrentItem.Id_Reserve, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="50"/>
+                        <Button Command="{Binding SelectReserveCommand}" IsEnabled="{Binding IsEnabled}"  Content="Choisir Réservation" ></Button>
+                        <!--Visibility="{Binding VisibilitySelectReserve}"-->
+                    </WrapPanel>
+                    <Label Grid.Column="0" Content="Nom:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+                    <TextBox x:Name="nomTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6" IsReadOnly="True" Text="{Binding ArrivesViewSource.CurrentItem.RESERVE.CLIENT.Nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
                 </Grid>
 
-            </StackPanel>
-
-            <!--partie centrale haut lien 1-1-->
-            <StackPanel Background="CornflowerBlue"  Margin="20,20,0,10" Name="topcenter" Grid.Row="0"  Grid.Column="1"   >
-                <Grid x:Name="grid2" DataContext="{StaticResource cLIENTViewSource}" HorizontalAlignment="Left">
+                <Grid x:Name="grid3" HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Content="Adresse:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                    <TextBox x:Name="adresseTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding Adresse, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Date Exp:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-                    <DatePicker x:Name="date_ExpDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" SelectedDate="{Binding Date_Exp, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
-                    <Label Grid.Column="0" Content="Id Client:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                    <TextBox x:Name="id_ClientTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding Id_Client, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Nom:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                    <TextBox x:Name="nomTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding Nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Num Carte:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-                    <TextBox x:Name="num_CarteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding Num_Carte, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Solde Du:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-                    <TextBox x:Name="solde_DuTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="5" Text="{Binding Solde_Du, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Telephone:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
-                    <TextBox x:Name="telephoneTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6" Text="{Binding Telephone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                    <Label Grid.Column="0" Content="Type Carte:" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
-                    <TextBox x:Name="type_CarteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="7" Text="{Binding Type_Carte, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
                 </Grid>
-
-
-
             </StackPanel>
-            <!--fin lien 1-1-->
-            <!--bouton add edit delete save cancel parent-->
             <StackPanel   Grid.Column="2" Margin="10,10,10,5" >
 
                 <Button Margin="0,5,5,5" Command="{Binding AddArriveCommand}" Width  ="75" >Add</Button>
@@ -186,43 +220,29 @@
                 <Button   Margin="0,5,5,5" Command="{Binding CancelArriveCommand}" Content="Cancel" Width  ="75" />
             </StackPanel>
             <WrapPanel  Name="ligneVide" Background="Yellow" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
-            <!--bouton add edit delete save cancel enfant droite du grid-->
             <StackPanel Name="buttomRight" Grid.Row="2" Grid.Column="2" Margin="10,10,10,5" >
-
-
-                <Button Name="btnAddEnfant" Margin="0,5,5,5" Command="{Binding AddEnfantCommand}" Width="75"
-              >Add Enfant</Button>
-                <Button Name="btnDeleteEnfant"  Margin="0,5,5,5" Command="{Binding DeleteEnfantCommand}"
-                 CommandParameter="{Binding ElementName=mon_DataGrid, Path=SelectedItem}" Width="75">Delete Enfant</Button>
-
-
+                <Button Name="btnAddEnfant" Margin="0,5,5,5" IsEnabled="{Binding IsEnabled}" Command="{Binding SelectChambreCommand}" Width="100">Choisir Chambre</Button>
             </StackPanel>
 
 
-            <!--<StackPanel Grid.Column="1" Grid.Row="1" Margin="10,10,10,5" Name="nav" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-            <Button Name="btnFirst"   Command="{Binding FirstPersonneCommand}" Content="|◄" Style="{StaticResource NavButton}"/>
-            <Button Name="btnPrev"   Command="{Binding PrevPersonneCommand}"  Content="◄"  Style="{StaticResource NavButton}"/>
-            <Button Name="btnNext"  Command="{Binding NextPersonneCommand}"   Content="►"  Style="{StaticResource NavButton}"/>
-            <Button Name="btnLast"  Command="{Binding LastPersonneCommand}"   Content="►|" Style="{StaticResource NavButton}"/>
-        </StackPanel>-->
-            <StackPanel Background="Azure"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{StaticResource aYANTViewSource}" >
-                <DataGrid x:Name="aYANTDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="400">
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="10,10,10,5" Name="nav" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+
+            </StackPanel>
+            <StackPanel Background="Azure"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  >
+                <DataGrid x:Name="mon_DataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding ArrivesViewSource.CurrentItem.RESERVE.DE}" IsEnabled="False"  RowDetailsVisibilityMode="VisibleWhenSelected" Width="600">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="code_CommoditeColumn" Binding="{Binding Code_Commodite}" Header="Code Commodite" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="id_AyantColumn" Binding="{Binding Id_Ayant}" Header="Id Ayant" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="id_ChambreColumn1" Binding="{Binding Id_Chambre}" Header="Id Chambre" Width="SizeToHeader"/>
+                        <DataGridCheckBoxColumn x:Name="attribueeColumn" Binding="{Binding Attribuee}" Header="Attribuee" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_ChambreColumn" Binding="{Binding Id_Chambre}" Header="Id Chambre" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_DeColumn" Binding="{Binding Id_De}" Header="Id De" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_ReserveColumn1" Binding="{Binding Id_Reserve}" Header="Id Reserve" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="No_Chambre" Binding="{Binding CHAMBRE.Id_Chambre}" Header="No.chambre" Width="Auto"/>
+                        <DataGridTextColumn x:Name="Type_Chambre" Binding="{Binding CHAMBRE.Code_TypeChambre}" Header="Type de chambre" Width="Auto"/>
+                        <DataGridTextColumn x:Name="Prix_Chambre" Binding="{Binding CHAMBRE.Prix}" Header="Prix" Width="Auto"/>
+                        <DataGridTextColumn x:Name="Etat_Chambre" Binding="{Binding CHAMBRE.Etat}" Header="Occupée" Width="Auto"/>
+                        <DataGridTextColumn x:Name="Description" Binding="{Binding CHAMBRE.TYPECHAMBRE.Description}" Header="Description" Width="Auto"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
-            <StackPanel Background="CadetBlue"   Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
-            </StackPanel>
         </Grid>
-
-
-
-
-
-
-
     </Grid>
 </UserControl>

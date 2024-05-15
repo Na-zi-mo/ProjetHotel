@@ -88,3 +88,12 @@ C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPL
 C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\hotel24Eq5.csproj.CoreCompileInputs.cache
 C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\hotel24Eq5.exe
 C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\hotel24Eq5.pdb
+C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\hotel24Eq5_Content.g.cs
+C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\Views\AddReserve.g.cs
+C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\Views\ListSelectChambreView.g.cs
+C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\Views\ListSelectClientView.g.cs
+C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\Views\ListSelectReservationView.g.cs
+C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\Views\AddReserve.baml
+C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\Views\ListSelectChambreView.baml
+C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\Views\ListSelectClientView.baml
+C:\Users\nazim\OneDrive - Cégep de Shawinigan\CÉGEP\_H24\DÉVELOPPEMENT D'APPLICATIONS D'ENTREPRISE I\PROJET\ProjetHotel\obj\Debug\Views\ListSelectReservationView.baml

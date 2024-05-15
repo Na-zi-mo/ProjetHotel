@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="hotel24Eq5.Views.ListSelectChambreView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:hotel24Eq5.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="AntiqueWhite">
+    <Grid Background="Aquamarine">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListView x:Name="cHAMBREListView" Grid.Row="0" Grid.ColumnSpan="2" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding ChambresViewSource}" SelectionMode="Single" Margin="0,0,0,0" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="code_LocalisationColumn" Header="Code Localisation" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="6,-1,-6,-1" Text="{Binding Code_Localisation}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="code_TypeChambreColumn" Header="Code Type Chambre" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Code_TypeChambre}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="etageColumn" Header="Etage" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Etage}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="etatColumn" Header="Etat" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Etat}" Margin="-6,-1,-6,-1"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="id_ChambreColumn2" Header="Id Chambre" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Id_Chambre}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="memoColumn" Header="Memo" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Memo}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="prixColumn" Header="Prix" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Prix}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Grid.Row="1" Grid.Column="0" Content="Ok" Width="auto" Command="{Binding OkChambreCommand}"></Button>
+        <Button Grid.Row="1" Grid.Column="1" Content="Cancel" Width="auto" Command="{Binding CancelChambreCommand}"></Button>
+    </Grid>
+</UserControl>
