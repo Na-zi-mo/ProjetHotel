@@ -211,9 +211,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="scripts\PS_InsertArrive.sql" />
-    <Content Include="scripts\scriptBd_erick.sql" />
-    <Content Include="scripts\SQLhotel24v3.sql" />
+    <Content Include="Scripts\PS_InsertArrive.sql" />
+    <Content Include="Scripts\scriptBd_erick.sql" />
+    <Content Include="Scripts\SQLhotel24v3.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

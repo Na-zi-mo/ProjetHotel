@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\viewmodels\\arriveviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|solutionrelative:viewmodels\\arriveviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|c:\\users\\nazim\\onedrive - c\u00E9gep de shawinigan\\c\u00E9gep\\_h24\\d\u00E9veloppement d\u0027applications d\u0027entreprise i\\projet\\projethotel\\views\\arriveview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|solutionrelative:views\\arriveview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\models\\dataservicehotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|solutionrelative:models\\dataservicehotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|c:\\users\\nazim\\onedrive - c\u00E9gep de shawinigan\\c\u00E9gep\\_h24\\d\u00E9veloppement d\u0027applications d\u0027entreprise i\\projet\\projethotel\\scripts\\scriptbd_erick.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
       "RelativeMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|solutionrelative:scripts\\scriptbd_erick.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\models\\dataservicehotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|solutionrelative:models\\dataservicehotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|c:\\users\\nazim\\onedrive - c\u00E9gep de shawinigan\\c\u00E9gep\\_h24\\d\u00E9veloppement d\u0027applications d\u0027entreprise i\\projet\\projethotel\\viewmodels\\arriveviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|solutionrelative:viewmodels\\arriveviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\views\\arriveview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|solutionrelative:views\\arriveview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7DDB4BBA-8253-4A21-85B9-8AE80944E80D}|hotel24Eq5.csproj|C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\commands\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,7 +78,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -86,27 +86,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "scriptBd_erick.sql ",
-              "DocumentMoniker": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\scripts\\scriptBd_erick.sql",
-              "RelativeDocumentMoniker": "scripts\\scriptBd_erick.sql",
-              "ToolTip": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\scripts\\scriptBd_erick.sql",
-              "RelativeToolTip": "scripts\\scriptBd_erick.sql",
+              "DocumentMoniker": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\Scripts\\scriptBd_erick.sql",
+              "RelativeDocumentMoniker": "Scripts\\scriptBd_erick.sql",
+              "ToolTip": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\Scripts\\scriptBd_erick.sql",
+              "RelativeToolTip": "Scripts\\scriptBd_erick.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-05-15T17:26:30.382Z",
+              "WhenOpened": "2024-05-15T18:13:45.153Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "ArriveViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\ViewModels\\ArriveViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ArriveViewModel.cs",
+              "ToolTip": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\ViewModels\\ArriveViewModel.cs",
+              "RelativeToolTip": "ViewModels\\ArriveViewModel.cs",
+              "ViewState": "AQIAAOUBAAAAAAAAAAAuwOkBAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-14T20:04:04.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ArriveView.xaml",
               "DocumentMoniker": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\Views\\ArriveView.xaml",
               "RelativeDocumentMoniker": "Views\\ArriveView.xaml",
               "ToolTip": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\Views\\ArriveView.xaml",
               "RelativeToolTip": "Views\\ArriveView.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-03-28T16:54:51.4Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-28T16:54:51.4Z"
             },
             {
               "$type": "Document",
@@ -158,27 +170,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ArriveViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\ViewModels\\ArriveViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\ArriveViewModel.cs",
-              "ToolTip": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\ViewModels\\ArriveViewModel.cs",
-              "RelativeToolTip": "ViewModels\\ArriveViewModel.cs",
-              "ViewState": "AQIAANoBAAAAAAAAAAAgwOkBAABJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T20:04:04.911Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "DataServiceHotel.cs",
               "DocumentMoniker": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\Models\\DataServiceHotel.cs",
               "RelativeDocumentMoniker": "Models\\DataServiceHotel.cs",
               "ToolTip": "C:\\Users\\nazim\\OneDrive - C\u00E9gep de Shawinigan\\C\u00C9GEP\\_H24\\D\u00C9VELOPPEMENT D\u0027APPLICATIONS D\u0027ENTREPRISE I\\PROJET\\ProjetHotel\\Models\\DataServiceHotel.cs",
               "RelativeToolTip": "Models\\DataServiceHotel.cs",
-              "ViewState": "AQIAALYCAAAAAAAAAAAuwNUCAAAAAAAA",
+              "ViewState": "AQIAAJYAAAAAAAAAAAAiwKoAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T20:08:02.166Z"
+              "WhenOpened": "2024-04-14T20:08:02.166Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
