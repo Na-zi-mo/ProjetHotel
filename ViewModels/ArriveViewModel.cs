@@ -486,6 +486,8 @@ namespace hotel24Eq5.ViewModels
                     ArrivesViewSource.MoveCurrentToLast();
                     OnPropertyChanged("ArrivesViewSource");
                     ArrivesViewSource.Refresh();
+
+                    MessageBox.Show("L'arrivée a bel et bien été supprimé");
                 }
             }
             else
