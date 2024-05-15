@@ -159,7 +159,7 @@ namespace hotel24Eq5.Models
         public DataServiceHotel()
         {
             connectionString = @"Data Source=LAPTOP-BA8LUHNR\SQLEXPRESS;Initial Catalog=bdhotel24;Integrated Security=True;Connect Timeout=30;Encrypt=False";
-            //connectionString =;
+            connectionString = @"Data Source=155.138.137.213;Initial Catalog=db_erick;Persist Security Info=True;User ID=erick;Password=EVxrq47wDrjQp6Ty";
             LoadAll();
 
         }
@@ -190,23 +190,21 @@ namespace hotel24Eq5.Models
                 connection.ConnectionString = connectionString;
                 connection.Open();
 
-
-
-                string queryString = "DELETE dbo.TRX " +
+                string queryString = "DELETE TRX " +
                                    "WHERE(TRX.Id_Arrive = @Id_Arrive)";
                 SqlCommand command = new SqlCommand(queryString, connection);
 
                 command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
                 command.ExecuteNonQuery();
 
-                queryString = "DELETE dbo.DEPART " +
+                queryString = "DELETE DEPART " +
                                    "WHERE(DEPART.Id_Arrive = @Id_Arrive)";
                 command = new SqlCommand(queryString, connection);
 
                 command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
                 command.ExecuteNonQuery();
 
-                queryString = "DELETE dbo.ARRIVE " +
+                queryString = "DELETE ARRIVE " +
                                       "WHERE(ARRIVE.Id_Arrive = @Id_Arrive)";
                 command = new SqlCommand(queryString, connection);
 
@@ -215,7 +213,7 @@ namespace hotel24Eq5.Models
 
 
 
-                queryString = "UPDATE dbo.DE" +
+                queryString = "UPDATE DE" +
                    " SET Attribuee = @Attribuee " +
                    "WHERE Id_Chambre=@Id_Chambre";
 
@@ -250,10 +248,60 @@ namespace hotel24Eq5.Models
 
         private void InsertArrive(SqlConnection connection, ARRIVE arrive)
         {
-            String queryString = "dbo.PS_InsertArrive";
+            //String queryString = "PS_InsertArrive";
+            //using (SqlCommand command = new SqlCommand(queryString, connection))
+            //{
+            //    command.CommandType = CommandType.StoredProcedure;
+
+            //    command.Parameters.AddWithValue("@Id_Reserve", arrive.Id_Reserve);
+            //    command.Parameters.AddWithValue("@Id_Client", arrive.Id_Client);
+            //    command.Parameters.AddWithValue("@Date_Arrive", arrive.Date_Arrive);
+            //    command.Parameters.AddWithValue("@Id_Chambre", arrive.Id_Chambre);
+            //    command.Parameters.AddWithValue("@Recu_Par", arrive.Recu_Par);
+
+
+            //    SqlParameter paramIdItem = new SqlParameter("@Id_Arrive", SqlDbType.Int);
+            //    paramIdItem.Direction = ParameterDirection.Output;
+
+
+            //    var result = 0;
+            //    command.Parameters.Add(paramIdItem);
+            //    try
+            //    {
+            //        result = command.ExecuteNonQuery();
+
+            //        int num = (System.Int32)paramIdItem.Value;
+
+            //        arrive.Id_Arrive = num;
+
+            //        foreach (var item in arrive.RESERVE.DE)
+            //        {
+            //            queryString = "UPDATE DE" +
+            //              " SET Attribuee=@Attribuee " +
+            //              "WHERE(Id_De=@Id_De)";
+
+
+            //            SqlCommand command2 = new SqlCommand(queryString, connection);
+
+            //            command2.Parameters.AddWithValue("@Attribuee", item.Attribuee);
+
+            //            command2.Parameters.AddWithValue("@Id_De", item.Id_De);
+
+            //            command2.ExecuteNonQuery();
+            //        }
+
+            //    }
+            //    catch (Exception ee)
+            //    {
+            //        MessageBox.Show(ee.Message);
+            //        connection.Close();
+            //    }
+
+            //}
+
+            String queryString = "INSERT INTO ARRIVE (Id_Reserve, Id_Client, Date_Arrive, Id_Chambre, Recu_Par) VALUES (@Id_Reserve,  @Id_Client, @Date_Arrive, @Id_Chambre, @Recu_Par)";
             using (SqlCommand command = new SqlCommand(queryString, connection))
             {
-                command.CommandType = CommandType.StoredProcedure;
 
                 command.Parameters.AddWithValue("@Id_Reserve", arrive.Id_Reserve);
                 command.Parameters.AddWithValue("@Id_Client", arrive.Id_Client);
@@ -261,46 +309,32 @@ namespace hotel24Eq5.Models
                 command.Parameters.AddWithValue("@Id_Chambre", arrive.Id_Chambre);
                 command.Parameters.AddWithValue("@Recu_Par", arrive.Recu_Par);
 
-
-                SqlParameter paramIdItem = new SqlParameter("@Id_Arrive", SqlDbType.Int);
-                paramIdItem.Direction = ParameterDirection.Output;
-
-
-                var result = 0;
-                command.Parameters.Add(paramIdItem);
-                try
-                {
-                    result = command.ExecuteNonQuery();
-
-                    int num = (System.Int32)paramIdItem.Value;
-
-                    arrive.Id_Arrive = num;
-
-                    foreach (var item in arrive.RESERVE.DE)
-                    {
-                        queryString = "UPDATE dbo.DE" +
-                          " SET Attribuee=@Attribuee " +
-                          "WHERE(Id_De=@Id_De)";
-
-
-                        SqlCommand command2 = new SqlCommand(queryString, connection);
-
-                        command2.Parameters.AddWithValue("@Attribuee", item.Attribuee);
-
-                        command2.Parameters.AddWithValue("@Id_De", item.Id_De);
-
-                        command2.ExecuteNonQuery();
-                    }
-
-                }
-                catch (Exception ee)
-                {
-                    MessageBox.Show(ee.Message);
-                    connection.Close();
-                }
-
+                command.ExecuteNonQuery();
             }
 
+            queryString = "SELECT IDENT_CURRENT('ARRIVE')";
+
+            using (SqlCommand command = new SqlCommand(queryString, connection))
+            {
+                arrive.Id_Arrive = Convert.ToInt32(command.ExecuteScalar());
+
+
+                foreach (var item in arrive.RESERVE.DE)
+                {
+                    queryString = "UPDATE DE" +
+                      " SET Attribuee=@Attribuee " +
+                      "WHERE(Id_De=@Id_De)";
+
+
+                    SqlCommand command2 = new SqlCommand(queryString, connection);
+
+                    command2.Parameters.AddWithValue("@Attribuee", item.Attribuee);
+
+                    command2.Parameters.AddWithValue("@Id_De", item.Id_De);
+
+                    command2.ExecuteNonQuery();
+                }
+            }
         }
 
         public void UpdateArrive(ARRIVE arrive)
@@ -310,7 +344,7 @@ namespace hotel24Eq5.Models
                 connection.ConnectionString = connectionString;
                 connection.Open();
 
-                string queryString = "UPDATE dbo.ARRIVE" +
+                string queryString = "UPDATE ARRIVE" +
                     " SET Id_Chambre = @Id_Chambre, " + "Recu_Par = @Recu_Par " +
                     "WHERE Id_Arrive=@Id_Arrive";
 
@@ -329,9 +363,9 @@ namespace hotel24Eq5.Models
                     {
                         foreach (var item in arrive.RESERVE.DE)
                         {
-                            queryString = "UPDATE dbo.DE" +
-                          " SET Attribuee=@Attribuee " +
-                          "WHERE(Id_De=@Id_De)";
+                            queryString = "UPDATE DE" +
+                              " SET Attribuee=@Attribuee " +
+                              "WHERE(Id_De=@Id_De)";
 
 
                             SqlCommand command2 = new SqlCommand(queryString, connection);
@@ -367,7 +401,7 @@ namespace hotel24Eq5.Models
                 connection.Open();
 
                 string queryString = "SELECT * " +
-                  "FROM dbo.ARRIVE " +
+                  "FROM ARRIVE " +
                   "WHERE Id_Arrive=@Id_Arrive";
 
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -406,7 +440,7 @@ namespace hotel24Eq5.Models
 
             TypesChambres = new ObservableCollection<TYPECHAMBRE>();
 
-            string queryString = "SELECT * FROM dbo.TYPECHAMBRE";
+            string queryString = "SELECT * FROM TYPECHAMBRE";
 
             SqlCommand command = new SqlCommand(queryString, connection);
             command.ExecuteNonQuery();
@@ -432,7 +466,7 @@ namespace hotel24Eq5.Models
         }
         private void LoadDes(SqlConnection connection, RESERVE reserve)
         {
-            string queryString = "SELECT * FROM dbo.DE WHERE Id_Reserve=@Id_Reserve";
+            string queryString = "SELECT * FROM DE WHERE Id_Reserve=@Id_Reserve";
 
             SqlCommand command = new SqlCommand(queryString, connection);
             command.Parameters.AddWithValue("@Id_Reserve", reserve.Id_Reserve);
@@ -465,7 +499,7 @@ namespace hotel24Eq5.Models
         {
             Trxs = new ObservableCollection<TRX>();
 
-            string queryString = "SELECT * FROM dbo.TRX " +
+            string queryString = "SELECT * FROM TRX " +
                 "WHERE Id_Arrive=@Id_Arrive";
 
             SqlCommand command = new SqlCommand(queryString, connection);
@@ -503,7 +537,7 @@ namespace hotel24Eq5.Models
         {
             Departs = new ObservableCollection<DEPART>();
 
-            string queryString = "SELECT * FROM dbo.DEPART " + "WHERE Id_Arrive=@Id_Arrive";
+            string queryString = "SELECT * FROM DEPART " + "WHERE Id_Arrive=@Id_Arrive";
 
             SqlCommand command = new SqlCommand(queryString, connection);
             command.Parameters.AddWithValue("@Id_Arrive", arrive.Id_Arrive);
@@ -534,7 +568,7 @@ namespace hotel24Eq5.Models
         {
             Arrives = new ObservableCollection<ARRIVE>();
 
-            string queryString = "SELECT * FROM dbo.ARRIVE";
+            string queryString = "SELECT * FROM ARRIVE";
 
             SqlCommand command = new SqlCommand(queryString, connection);
 
@@ -580,7 +614,7 @@ namespace hotel24Eq5.Models
         {
             Reserves = new ObservableCollection<RESERVE>();
 
-            string queryString = "SELECT * FROM dbo.RESERVE";
+            string queryString = "SELECT * FROM RESERVE";
 
             SqlCommand command = new SqlCommand(queryString, connection);
 
@@ -622,7 +656,7 @@ namespace hotel24Eq5.Models
         {
             Chambres = new ObservableCollection<CHAMBRE>();
 
-            string queryString = "SELECT * FROM dbo.CHAMBRE";
+            string queryString = "SELECT * FROM CHAMBRE";
 
             SqlCommand command = new SqlCommand(queryString, connection);
 
@@ -657,7 +691,7 @@ namespace hotel24Eq5.Models
         {
             Clients = new ObservableCollection<CLIENT>();
 
-            string queryString = "SELECT * FROM dbo.CLIENT";
+            string queryString = "SELECT * FROM  CLIENT";
 
             SqlCommand command = new SqlCommand(queryString, connection);
 
