@@ -46,7 +46,17 @@ namespace hotel24Eq5.ViewModels
         public virtual bool IsReadOnly => ActionModeActuel == ACTIONMODE.DISPLAY;
         public virtual bool IsEnabledListNavigation => ActionModeActuel == ACTIONMODE.DISPLAY;
 
+		public virtual bool CanEndEdit(object obj)
+		{ // add edit delete enfants save cancel
+			return ActionModeActuel != ACTIONMODE.DISPLAY;
+		}
+		public virtual bool CanBeginEdit(object obj)// ni add ni edit ni delete
+
+		{// add edit delete parent
 
 
-    }
+			return ActionModeActuel == ACTIONMODE.DISPLAY;
+		}
+
+	}
 }

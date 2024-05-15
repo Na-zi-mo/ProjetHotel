@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -80,6 +82,9 @@
     <Compile Include="Views\DepartView.xaml.cs">
       <DependentUpon>DepartView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ListSelectCommoditeView.xaml.cs">
+      <DependentUpon>ListSelectCommoditeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReservationView.xaml.cs">
       <DependentUpon>ReservationView.xaml</DependentUpon>
     </Compile>
@@ -115,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DepartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListSelectCommoditeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,6 +174,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Scripts\SQLhotel24 %283%29.sql" />
+    <Content Include="Scripts\Insert.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

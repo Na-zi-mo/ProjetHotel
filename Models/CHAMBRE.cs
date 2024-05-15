@@ -21,12 +21,12 @@ namespace hotel24Eq5.Models
             this.AYANT = new ObservableCollection <AYANT>();
             this.DE = new ObservableCollection <DE>();
         }
-    
-        public int Id_Chambre { get; set; }
+
+        public int Id_Chambre { get; set; } = -1;
         public Nullable<int> Etage { get; set; }
         public Nullable<decimal> Prix { get; set; }
         //attention bit dans bd fait un bool
-        public Nullable<bool> Etat { get; set; }
+        public Nullable<bool> Etat { get; set; } = false;
         public string Code_TypeChambre { get; set; }
         public string Code_Localisation { get; set; }
         public string Memo { get; set; }

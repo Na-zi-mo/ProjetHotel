@@ -14,7 +14,7 @@ namespace hotel24Eq5.Models
     
     public partial class AYANT
     {
-        public int Id_Ayant { get; set; }
+        public int Id_Ayant { get; set; } = -1;
         public Nullable<int> Id_Chambre { get; set; }
         public string Code_Commodite { get; set; }
     

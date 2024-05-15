@@ -5,8 +5,208 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:hotel24Eq5.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
-    <Grid>
-        <Label Content="Chambre"/>
+             d:DesignHeight="600" d:DesignWidth="1100" Background="White">
+    <Grid ShowGridLines="True">
+        <!--5 colonnes 0 et 1 et 2 pour autres listes au choix-->
+        <!--colonne 3 liste de navigation principale-->
+        <!--colonne 4  tout le reste divisée dans un autre grid-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="AUTO" MinWidth="50" />
+            <ColumnDefinition Width="*" />
+
+        </Grid.ColumnDefinitions>
+
+        <local:ListSelectCommoditeView Visibility="{Binding VisibilitySelectCommodite}" Margin="0,2,5,-2" Grid.ColumnSpan="3" ></local:ListSelectCommoditeView>
+
+        <!--liste de navigation principale a gauche-->
+        <WrapPanel  Grid.Column="2" Background="Bisque" Visibility="{Binding VisibilitySelectChambre}">
+            <ListView x:Name="cHAMBREListView" Height="200" ItemsSource="{Binding ChambresViewSource}" IsSynchronizedWithCurrentItem="True"
+ SelectionMode="Single" Width="400">
+                <ListView.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Control.VerticalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn x:Name="code_LocalisationColumn" Header="Code Localisation" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Code_Localisation}" Margin="6,-1,-6,-1"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="code_TypeChambreColumn" Header="Code Type Chambre" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Code_TypeChambre}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="etageColumn" Header="Etage" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Etage}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="etatColumn" Header="Etat" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Etat}" Margin="-6,-1,-6,-1"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="id_ChambreColumn" Header="Id Chambre" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Id_Chambre}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="memoColumn" Header="Memo" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Memo}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="prixColumn" Header="Prix" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Prix}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </WrapPanel>
+
+
+
+
+        <Grid ShowGridLines="True" Grid.Column="4"  Background="#FFBFCDDB" HorizontalAlignment="Stretch" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="AUTO" />
+                <ColumnDefinition Width="AUTO"  />
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition   Height="4*"/>
+                <RowDefinition Height="AUTO" MinHeight="10"/>
+                <RowDefinition  Height="3*"/>
+                <RowDefinition  Height="5"/>
+            </Grid.RowDefinitions>
+
+
+            <!-- Liaison à l'objet personne  -->
+            <StackPanel Background="LightSkyBlue"  Name="topleft"   Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="2"  Margin="5"  >
+                <Grid x:Name="grid1" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Content="Code Localisation:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0, 5, 0, 5" Height="20" Width="40" IsEnabled="{Binding IsEnabledTextBox}" 
+                             Text="{Binding ChambresViewSource.CurrentItem.Code_Localisation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Grid.Column="1" HorizontalAlignment="Right" Height="23" IsEnabled="{Binding IsEnabled}" Margin="10,3,3,3" Grid.Row="0" VerticalAlignment="Center" Width="70"             
+                              Name="code_LocalisationComboBox"
+                              ItemsSource="{Binding LocalisationsViewSource}"
+                              DisplayMemberPath="Description"
+                              SelectedItem="{Binding ChambresViewSource.CurrentItem.LOCALISATION}"
+                              SelectedValue="{Binding ChambresViewSource.CurrentItem.Code_Localisation}"
+                              SelectedValuePath="Code_Localisation"/>
+
+                    <Label Grid.Column="0" Content="Code Type Chambre:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0, 5, 0, 5" Height="20" Width="40" Grid.Row="1" IsEnabled="{Binding IsEnabledTextBox}"
+                             Text="{Binding ChambresViewSource.CurrentItem.Code_TypeChambre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Height="23" Margin="10,3,3,3" VerticalAlignment="Center" Width="70" IsEnabled="{Binding IsEnabled}"
+                              Name="code_TypeChambreComboBox" 
+                              ItemsSource="{Binding TypesChambresViewSource}"
+                              DisplayMemberPath="Description"
+                              SelectedItem="{Binding ChambresViewSource.CurrentItem.TYPECHAMBRE}"
+                              SelectedValue="{Binding ChambresViewSource.CurrentItem.Code_TypeChambre}"
+                              SelectedValuePath="Code_TypeChambre"/>
+                    <!--<TextBox x:Name="code_TypeChambreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding ChambresViewSource.CurrentItem.Code_TypeChambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>-->
+                    <Label Grid.Column="0" Content="Etage:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBox x:Name="etageTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding ChambresViewSource.CurrentItem.Etage, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="{Binding IsEnabledEtat}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Etat:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="etatCheckBox" Grid.Column="1" Content="" HorizontalAlignment="Left" IsChecked="{Binding ChambresViewSource.CurrentItem.Etat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="{Binding IsEnabled}" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" Content="Id Chambre:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                    <TextBox x:Name="id_ChambreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding ChambresViewSource.CurrentItem.Id_Chambre, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="{Binding IsEnabledIdChambre}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Memo:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                    <TextBox x:Name="memoTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="5" Text="{Binding ChambresViewSource.CurrentItem.Memo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="{Binding IsEnabled}" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Column="0" Content="Prix:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+                    <TextBox x:Name="prixTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6" Text="{Binding ChambresViewSource.CurrentItem.Prix, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="{Binding IsEnabled}" VerticalAlignment="Center" Width="120"/>
+                </Grid>
+
+            </StackPanel>
+
+            <!--partie centrale haut lien 1-1-->
+            <StackPanel Background="CornflowerBlue"  Margin="20,20,0,10" Name="topcenter" Grid.Row="0"  Grid.Column="1"   >
+
+
+
+            </StackPanel>
+            <!--fin lien 1-1-->
+            <!--bouton add edit delete save cancel parent-->
+            <StackPanel   Grid.Column="2" Margin="10,10,10,5" >
+
+                <Button Margin="0,5,5,5" Command="{Binding AddChambreCommand}" Width  ="75" >Add</Button>
+                <Button   Margin="0,5,5,5" Command="{Binding EditChambreCommand}" Content="Edit"  Width  ="75"/>
+                <Button   Margin="0,5,5,5" Command="{Binding DeleteChambreCommand}" Content="Delete"  Width  ="75"/>
+
+                <Button   Margin="0,5,5,5" Command="{Binding SaveChambreCommand}" Content="Save" Width  ="75" />
+                <Button   Margin="0,5,5,5" Command="{Binding CancelChambreCommand}" Content="Cancel" Width  ="75" />
+            </StackPanel>
+            <WrapPanel  Name="ligneVide" Background="Yellow" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+            <!--bouton add edit delete save cancel enfant droite du grid-->
+            <StackPanel Name="buttomRight" Grid.Row="2" Grid.Column="2" Margin="10,10,10,5" >
+
+
+                <Button Name="btnAddEnfant" Margin="0,5,5,5" Command="{Binding AddEnfantCommand}" CommandParameter="{Binding ElementName=mon_DataGrid, Path=SelectedItem}" Width="75">Add Enfant</Button>
+
+                <Button Name="btnDeleteEnfant"  Margin="0,5,5,5" Command="{Binding RemoveEnfantCommand}"
+                 CommandParameter="{Binding ElementName=mon_DataGrid, Path=SelectedItem}" Width="75">Delete Enfant</Button>
+
+
+            </StackPanel>
+
+
+            <!--<StackPanel Grid.Column="1" Grid.Row="1" Margin="10,10,10,5" Name="nav" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button Name="btnFirst"   Command="{Binding FirstPersonneCommand}" Content="|◄" Style="{StaticResource NavButton}"/>
+            <Button Name="btnPrev"   Command="{Binding PrevPersonneCommand}"  Content="◄"  Style="{StaticResource NavButton}"/>
+            <Button Name="btnNext"  Command="{Binding NextPersonneCommand}"   Content="►"  Style="{StaticResource NavButton}"/>
+            <Button Name="btnLast"  Command="{Binding LastPersonneCommand}"   Content="►|" Style="{StaticResource NavButton}"/>
+        </StackPanel>-->
+            <StackPanel Background="Azure"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                <DataGrid x:Name="mon_DataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding ChambresViewSource.CurrentItem.AYANT}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="337" IsReadOnly="{Binding IsReadOnly}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="code_CommoditeColumn" Binding="{Binding Code_Commodite}" Header="Code Commodite" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_AyantColumn" Binding="{Binding Id_Ayant}" Header="Id Ayant" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="id_ChambreColumn1" Binding="{Binding Id_Chambre}" Header="Id Chambre" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding COMMODITE.Description}" Header="Description"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel Background="CadetBlue"   Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </UserControl>
