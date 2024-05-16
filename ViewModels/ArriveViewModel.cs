@@ -427,13 +427,14 @@ namespace hotel24Eq5.ViewModels
                     return;
 
                 }
-                if (arrive.Date_Arrive < arrive.RESERVE.Date_Debut)
+
+                if (arrive.Date_Arrive?.Date < arrive.RESERVE.Date_Debut?.Date)
                 {
                     MessageBox.Show("La date d'arrivée ne peut pas être antérieure à celle du début de la réservation");
                     return;
 
                 }
-                if (arrive.Date_Arrive > arrive.RESERVE.Date_Fin)
+                if (arrive.Date_Arrive?.Date > arrive.RESERVE.Date_Fin?.Date)
                 {
                     MessageBox.Show("La date d'arrivée ne peut pas être postérieure à celle de la fin de la réservation");
                     return;

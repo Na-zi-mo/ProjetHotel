@@ -210,6 +210,8 @@ INSERT INTO RESERVE(Id_Client,Date_Reserve,Date_Debut ,Date_Fin ,Confirme) Value
 
  INSERT INTO RESERVE (Id_Client ,Date_Reserve ,Date_Debut ,Date_Fin ,Confirme) values(5, GETDATE() - 8, GETDATE() - 1, GETDATE() + 7, 0);
 
+ INSERT INTO RESERVE (Id_Client ,Date_Reserve ,Date_Debut ,Date_Fin ,Confirme) values(5, GETDATE() - 8, GETDATE() - 5, GETDATE()  - 7, 0);
+
 
  insert into COMMODITE(Code_Commodite,Description) VALUES ('AS', 'STANDARDS');
 insert into COMMODITE(Code_Commodite,Description) VALUES ('MB', 'MINI BAR');
@@ -248,6 +250,10 @@ insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisa
 insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisation,Memo) VALUES (0302,3, 100.99, 1, '2D','VM', 'ordinaire');
 insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisation,Memo) VALUES (0303,3, 100.99, 1, '2D','VM', 'ordinaire');
 insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisation,Memo) VALUES (0401,4, 75.99, 1, '2D','VM', 'ordinaire');
+insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisation,Memo) VALUES (0402,4, 90.99, 1, '2D','VM', 'ordinaire');
+
+insert into CHAMBRE   (Id_Chambre,Etage,Prix,Etat,Code_TypeChambre,Code_Localisation,Memo) VALUES (0501,5, 75.99, 1, '2D','VM', 'ordinaire');
+
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) values (0101, 'AS');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0202, 'MB');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) values (0201, 'AS');
@@ -261,6 +267,8 @@ insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0302, 'MB');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) values (0303, 'AS');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0303, 'MB');
 insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0401, 'MB');
+insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0402, 'AS');
+insert into AYANT(ID_CHAMbre, CODE_COMmodite) VALUES (0501, 'MB');
 
 insert into DE(ID_RESERve, ID_CHAMbre, ATTRIBUEE) VALUES (1, 0101, 1);
 insert into DE(ID_RESERve, ID_CHAMbre, ATTRIBUEE) VALUES (2, 0201, 1);
@@ -275,6 +283,8 @@ insert into DE(ID_RESERve, ID_CHAMbre,ATTRIBUEE) VALUES (5, 0202, 0);
 insert into DE(ID_RESERve, ID_CHAMbre,ATTRIBUEE) VALUES (6, 0202, 1);
 
 insert into DE(ID_RESERve, ID_CHAMbre,ATTRIBUEE) VALUES (6, 0401, 0);
+insert into DE(ID_RESERve, ID_CHAMbre,ATTRIBUEE) VALUES (6, 0402, 0);
+insert into DE(ID_RESERve, ID_CHAMbre,ATTRIBUEE) VALUES (7, 0501, 0);
 
 insert into ARRIVE(ID_RESERve, DATE_ARRIVe, ID_CLIENT, ID_CHAMbre, RECU_PAR ) VALUES(1, GETDATE(), 1, 0101, 'LA');
 insert into ARRIVE(ID_RESERve, DATE_ARRIVe, ID_CLIENT,ID_CHAMbre, RECU_PAR ) VALUES(2, GETDATE()-1, 2,0201, 'LA');
